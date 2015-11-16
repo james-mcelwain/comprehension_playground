@@ -44,7 +44,8 @@ var listFactory = function () {
 	}
 
 	return {
-		newComprehension: comprehension
+		newComprehension: comprehension,
+		newPredicateString: predicateGenerator
 	};
 };
 
@@ -64,14 +65,14 @@ const angular = require('angular'),
 
 angular.module('comprehensions', []).factory('listFactory', [listFactory]).controller('mainCtrl', ['listFactory', function (listFactory) {
   var vm = this;
-  vm.comprehension = {};
-  vm.comprehension.pattern = '';
   vm.submit = function () {
-    vm.comprehension.predicates = vm.comprehension.predicates.split(',');
-    console.log(vm.comprehension.predicates);
+    let pattern = vm.pattern;
+    let predicates = vm.predicates.split(',');
+    console.log(vm.predicates);
+    const predicateString = listFactory.newPredicateString(predicates);
+    vm.comprehension = `[ ${ vm.pattern } for x in range(1, infinity), if ${ predicateString } ]`;
+    console.log(listFactory.newComprehension(10, pattern, predicates));
   };
-
-  console.log(listFactory.newComprehension(10, 'x', ['x > 2', 'x < 7']));
 
   console.log('hello!');
 }]);

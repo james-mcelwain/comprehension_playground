@@ -43,7 +43,8 @@ var listFactory = function() {
 	}
 
 	return {
-		newComprehension : comprehension
+		newComprehension : comprehension,
+		newPredicateString: predicateGenerator
 	}
 }
 
