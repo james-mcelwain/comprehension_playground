@@ -5,8 +5,8 @@ html(ng-app='comprehensions')
     link(rel='stylesheet' href='./styles/styles.css')
   body(ng-controller='mainCtrl as vm')
     form(name='comprehension' ng-submit='vm.submit()')
-      label Pattern
-      input(type='text' name='pattern' ng-model='vm.pattern' required)
+      label lambda
+      input(type='text' name='lambda' ng-model='vm.lambda' required)
       label Predicates
       input(type='text' name='predicates' ng-model='vm.predicates')
       input(type="submit" id="submit" value="Submit")
