@@ -5,12 +5,15 @@ html(ng-app='comprehensions')
     link(rel='stylesheet' href='./styles/styles.css')
   body(ng-controller='mainCtrl as vm')
     form(name='comprehension' ng-submit='vm.submit()')
-      label lambda
+      label lambda x:
       input(type='text' name='lambda' ng-model='vm.lambda' required)
       label Predicates
       input(type='text' name='predicates' ng-model='vm.predicates')
       input(type="submit" id="submit" value="Submit")
+      #err {{ vm.err }}
 
     h1 [] : {{ vm.comprehension }}
 
-    div#slider
+    h3 {{ vm.list }}
+
+    #sketch

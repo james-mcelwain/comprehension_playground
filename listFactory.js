@@ -1,10 +1,10 @@
 "use strict";
 var listFactory = function() {
-	function comprehension( len, patternString, predicateArray ) {
+	function comprehension( len, lambdaString, predicateArray ) {
 
 		let predicateString = predicateGenerator(predicateArray);
-		let pattern = patternGenerator(patternString, predicateString);
-		return listGenerator( len ).map(pattern).filter(predicates);
+		let lambda = lambdaGenerator(lambdaString, predicateString);
+		return listGenerator( len ).map(lambda).filter(predicates);
 
 	}
 
@@ -12,17 +12,17 @@ var listFactory = function() {
 		return x != null || undefined;
 	}
 
-	function patternGenerator(patternString, predicateString) {
+	function lambdaGenerator(lambdaString, predicateString) {
 
-		function pattern( x, i, arr ) {
+		function lambda( x, i, arr ) {
 			if( eval( predicateString ) ) {
-				return eval( patternString );
+				return eval( lambdaString );
 			} else {
 				return;
 			}
 		}
 
-		return pattern;
+		return lambda;
 	}
 
 	function listGenerator( len ) {
@@ -50,6 +50,6 @@ var listFactory = function() {
 
 module.exports = listFactory;
 
-// let pattern = 'x';
+// let  = 'x';
 // let predicate = predicateGenerator(['x > 2', 'x % 3 != 0']);
-// console.log(listFactory.newComprehension(10, pattern, predicate));
+// console.log(listFactory.newComprehension(10, lambda, predicate));

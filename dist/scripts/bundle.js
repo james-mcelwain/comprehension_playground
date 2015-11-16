@@ -2,28 +2,28 @@
 "use strict";
 
 var listFactory = function () {
-	function comprehension(len, patternString, predicateArray) {
+	function comprehension(len, lambdaString, predicateArray) {
 
 		let predicateString = predicateGenerator(predicateArray);
-		let pattern = patternGenerator(patternString, predicateString);
-		return listGenerator(len).map(pattern).filter(predicates);
+		let lambda = lambdaGenerator(lambdaString, predicateString);
+		return listGenerator(len).map(lambda).filter(predicates);
 	}
 
 	function predicates(x) {
 		return x != null || undefined;
 	}
 
-	function patternGenerator(patternString, predicateString) {
+	function lambdaGenerator(lambdaString, predicateString) {
 
-		function pattern(x, i, arr) {
+		function lambda(x, i, arr) {
 			if (eval(predicateString)) {
-				return eval(patternString);
+				return eval(lambdaString);
 			} else {
 				return;
 			}
 		}
 
-		return pattern;
+		return lambda;
 	}
 
 	function listGenerator(len) {
@@ -51,9 +51,9 @@ var listFactory = function () {
 
 module.exports = listFactory;
 
-// let pattern = 'x';
+// let  = 'x';
 // let predicate = predicateGenerator(['x > 2', 'x % 3 != 0']);
-// console.log(listFactory.newComprehension(10, pattern, predicate));
+// console.log(listFactory.newComprehension(10, lambda, predicate));
 
 },{}],2:[function(require,module,exports){
 'use strict'
@@ -61,35 +61,32 @@ module.exports = listFactory;
 /** DEPENDENCIES **/
 ;
 const angular = require('angular'),
-      noUiSlider = require('nouislider-browser'),
       listFactory = require('./listFactory.js');
 
 angular.module('comprehensions', []).factory('listFactory', [listFactory]).controller('mainCtrl', ['listFactory', function (listFactory) {
-  var rangeSlider = document.getElementById('slider');
-
-  noUiSlider.create(rangeSlider, {
-    start: [4000],
-    range: {
-      'min': [2000],
-      'max': [10000]
-    }
-  });
 
   var vm = this;
 
   vm.submit = function () {
-    let pattern = vm.pattern;
+    let lambda = vm.lambda;
+
+    if (!vm.predicates.split('').some(function (char) {
+      return char == '>' || '<' || '=' || '!' || '%';
+    })) {
+      vm.err = 'Boolean operator required';
+    };
     let predicates = vm.predicates.split(',');
+
     console.log(vm.predicates);
     const predicateString = listFactory.newPredicateString(predicates);
-    vm.comprehension = `[ ${ vm.pattern } for x in range(1, infinity), if ${ predicateString } ]`;
-    console.log(listFactory.newComprehension(10, pattern, predicates));
+    vm.comprehension = `[ ${ vm.lambda } for x in range(1, infinity), if ${ predicateString } ]`;
+    vm.list = listFactory.newComprehension(10, lambda, predicates);
   };
 
   console.log('hello!');
 }]);
 
-},{"./listFactory.js":1,"angular":4,"nouislider-browser":5}],3:[function(require,module,exports){
+},{"./listFactory.js":1,"angular":4}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -28998,7 +28995,4 @@ $provide.value("$locale", {
 require('./angular');
 module.exports = angular;
 
-},{"./angular":3}],5:[function(require,module,exports){
-// placeholder, so require.resolve('xxx-browser') gives root path.
-
-},{}]},{},[2]);
+},{"./angular":3}]},{},[2]);

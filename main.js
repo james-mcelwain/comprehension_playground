@@ -15,12 +15,21 @@ angular
       var vm = this;
 
       vm.submit = function(  ) {
-        let pattern = vm.pattern;
+        let lambda = vm.lambda;
+
+        // if(!vm.predicates.split('').some(function( char ){
+        //   return char === '>' || '<' || '=' || '!' || '%'
+        // })){
+        //   vm.err = 'Boolean operator required';
+        // };
+
         let predicates = vm.predicates.split(',');
+
+
         console.log(vm.predicates);
         const predicateString = listFactory.newPredicateString(predicates);
-        vm.comprehension = `[ ${vm.pattern} for x in range(1, infinity), if ${predicateString} ]`
-        console.log(listFactory.newComprehension(10, pattern, predicates));
+        vm.comprehension = `[ ${vm.lambda} for x in range(1, infinity), if ${predicateString} ]`
+        vm.list = listFactory.newComprehension(10, lambda, predicates);
 
         };
 
