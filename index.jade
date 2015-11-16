@@ -3,5 +3,12 @@ html(ng-app='comprehensions')
     title
     script(src='./scripts/bundle.js')
     link(rel='stylesheet' href='./styles/styles.css')
-  body(ng-controller='mainCtrl')
-    h1 Hello!
+  body(ng-controller='mainCtrl as vm')
+    form(name='comprehension' ng-submit='vm.submit()')
+      label Pattern
+      input(type='text' name='pattern' ng-model='vm.comprehension.pattern' required)
+      label Predicates
+      input(type='text' name='predicates' ng-model='vm.comprehension.predicates')
+      input(type="submit" id="submit" value="Submit")
+
+    div {{ vm.comprehension.pattern }}

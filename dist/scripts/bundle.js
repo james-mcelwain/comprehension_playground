@@ -1,15 +1,82 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
+
+var listFactory = function () {
+	function comprehension(len, patternString, predicateArray) {
+
+		let predicateString = predicateGenerator(predicateArray);
+		let pattern = patternGenerator(patternString, predicateString);
+		return listGenerator(len).map(pattern).filter(predicates);
+	}
+
+	function predicates(x) {
+		return x != null || undefined;
+	}
+
+	function patternGenerator(patternString, predicateString) {
+
+		function pattern(x, i, arr) {
+			if (eval(predicateString)) {
+				return eval(patternString);
+			} else {
+				return;
+			}
+		}
+
+		return pattern;
+	}
+
+	function listGenerator(len) {
+
+		let list = [];
+
+		for (let i = 0; i < len; i++) {
+			list[i] = i + 1;
+		}
+
+		return list;
+	}
+
+	function predicateGenerator(predicates) {
+		predicates = predicates.join(' && ');
+
+		return predicates;
+	}
+
+	return {
+		newComprehension: comprehension
+	};
+};
+
+module.exports = listFactory;
+
+// let pattern = 'x';
+// let predicate = predicateGenerator(['x > 2', 'x % 3 != 0']);
+// console.log(listFactory.newComprehension(10, pattern, predicate));
+
+},{}],2:[function(require,module,exports){
 'use strict'
 
 /** DEPENDENCIES **/
 ;
-const angular = require('angular');
+const angular = require('angular'),
+      listFactory = require('./listFactory.js');
 
-angular.module('comprehensions', []).controller('mainCtrl', [function () {
-    console.log('hello!');
+angular.module('comprehensions', []).factory('listFactory', [listFactory]).controller('mainCtrl', ['listFactory', function (listFactory) {
+  var vm = this;
+  vm.comprehension = {};
+  vm.comprehension.pattern = '';
+  vm.submit = function () {
+    vm.comprehension.predicates = vm.comprehension.predicates.split(',');
+    console.log(vm.comprehension.predicates);
+  };
+
+  console.log(listFactory.newComprehension(10, 'x', ['x > 2', 'x < 7']));
+
+  console.log('hello!');
 }]);
 
-},{"angular":3}],2:[function(require,module,exports){
+},{"./listFactory.js":1,"angular":4}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -28914,8 +28981,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":2}]},{},[1]);
+},{"./angular":3}]},{},[2]);

@@ -10,13 +10,13 @@ const
 
 const config = {
   transforms: [babelify],
-  paths: {
-    sass: './*.scss',
-    css: './dist/styles',
-    es6: './main.js', // entry point to js for browserify
-    js: './dist/scripts',
-    jade: './*jade',
-    html: './dist/'
+  paths : {
+    sass : './*.scss',
+    css : './dist/styles',
+    es6 : './main.js', // entry point to js for browserify
+    js : './dist/scripts',
+    jade : './*jade',
+    html : './dist/'
   }
 }
 
