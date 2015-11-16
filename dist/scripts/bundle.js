@@ -70,11 +70,12 @@ angular.module('comprehensions', []).factory('listFactory', [listFactory]).contr
   vm.submit = function () {
     let lambda = vm.lambda;
 
-    if (!vm.predicates.split('').some(function (char) {
-      return char == '>' || '<' || '=' || '!' || '%';
-    })) {
-      vm.err = 'Boolean operator required';
-    };
+    // if(!vm.predicates.split('').some(function( char ){
+    //   return char === '>' || '<' || '=' || '!' || '%'
+    // })){
+    //   vm.err = 'Boolean operator required';
+    // };
+
     let predicates = vm.predicates.split(',');
 
     console.log(vm.predicates);
