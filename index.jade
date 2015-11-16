@@ -1,6 +1,7 @@
-html
+html(ng-app='comprehensions')
   head
     title
-    script(src='scripts/bundle.js')
-  body
+    script(src='./scripts/bundle.js')
+    link(rel='stylesheet' href='./styles/styles.css')
+  body(ng-controller='mainCtrl')
     h1 Hello!

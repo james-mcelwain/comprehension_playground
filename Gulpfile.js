@@ -11,7 +11,7 @@ const
 const config = {
   transforms: [babelify],
   paths: {
-    sass: './sass/*.scss',
+    sass: './*.scss',
     css: './dist/styles',
     es6: './main.js', // entry point to js for browserify
     js: './dist/scripts',
