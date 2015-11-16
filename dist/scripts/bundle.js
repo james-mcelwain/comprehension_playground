@@ -1,4 +1,35 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+var inputValidator = function () {
+
+	function predicateValidator(predicateArr) {
+		try {
+			predicateArr.forEach(validate);
+			return true;
+		} catch (err) {
+			console.log(err);
+			return err;
+		}
+	}
+
+	function validate(el, i, arr) {
+		const x = 1;
+		const test = eval(el);
+		if (typeof test !== 'boolean') {
+			throw new Error('Predicate must be expressed in the form of an equality');
+		}
+	}
+
+	return {
+		validatePredicates: predicateValidator
+
+	};
+};
+
+module.exports = inputValidator;
+
+},{}],2:[function(require,module,exports){
 "use strict";
 
 var listFactory = function () {
@@ -55,39 +86,39 @@ module.exports = listFactory;
 // let predicate = predicateGenerator(['x > 2', 'x % 3 != 0']);
 // console.log(listFactory.newComprehension(10, lambda, predicate));
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 'use strict'
 
 /** DEPENDENCIES **/
 ;
 const angular = require('angular'),
-      listFactory = require('./listFactory.js');
+      listFactory = require('./listFactory.js'),
+      inputValidator = require('./inputValidator.js');
 
-angular.module('comprehensions', []).factory('listFactory', [listFactory]).controller('mainCtrl', ['listFactory', function (listFactory) {
+angular.module('comprehensions', []).factory('inputValidator', [inputValidator]).factory('listFactory', [listFactory]).controller('mainCtrl', ['listFactory', 'inputValidator', function (listFactory, inputValidator) {
 
   var vm = this;
 
   vm.submit = function () {
+    vm.err = '';
     let lambda = vm.lambda;
-
-    // if(!vm.predicates.split('').some(function( char ){
-    //   return char === '>' || '<' || '=' || '!' || '%'
-    // })){
-    //   vm.err = 'Boolean operator required';
-    // };
-
-    let predicates = vm.predicates.split(',');
-
-    console.log(vm.predicates);
-    const predicateString = listFactory.newPredicateString(predicates);
-    vm.comprehension = `[ ${ vm.lambda } for x in range(1, infinity), if ${ predicateString } ]`;
-    vm.list = listFactory.newComprehension(10, lambda, predicates);
+    if (vm.predicates) {
+      let predicates = vm.predicates.split(',');
+    }
+    const test1 = inputValidator.validatePredicates(predicates);
+    console.log(test1);
+    if (test1 !== true) {
+      console.log(test1);
+      vm.err = test1.message;
+    } else {
+      const predicateString = listFactory.newPredicateString(predicates);
+      vm.comprehension = `[ ${ vm.lambda } for x in range(1, infinity), if ${ predicateString } ]`;
+      vm.list = listFactory.newComprehension(10, lambda, predicates);
+    }
   };
-
-  console.log('hello!');
 }]);
 
-},{"./listFactory.js":1,"angular":4}],3:[function(require,module,exports){
+},{"./inputValidator.js":1,"./listFactory.js":2,"angular":5}],4:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -28992,8 +29023,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":3}]},{},[2]);
+},{"./angular":4}]},{},[3]);

@@ -3,8 +3,8 @@ var inputValidator = function(){
 
 	function predicateValidator( predicateArr ){
 		try {
-			predicateArr.forEach(removeWhiteSpace);
-			predicateArr.forEach(validateEqualityOp);
+			predicateArr.forEach(validate);
+			return true;
 		} catch( err ) {
 			console.log(err);
 			return err;
@@ -12,40 +12,18 @@ var inputValidator = function(){
 
 	}
 
-	return {
-		validatePredicate: predicateValidator,
-
-	}
-}
-
-
-// UTILITY FUNCTIONS
-
-var removeWhiteSpace = function( el, i, arr ) {
-	arr[i] = el.split('').filter(( char ) => char != ' ').join('')
-}
-var validateEqualityOp = function( el, i, arr ) {
-
-	// if at least one '=' is present
-	if(el.indexOf('=') !== -1 ){
-		// if '==' is not present
-		if( el.indexOf('==') === -1){
-			throw new Error('Assignment forbidden in predicate statement');
+	function validate( el, i, arr ){
+		const x = 1
+		const test = eval(el);
+		if(typeof test !== 'boolean') {
+			throw new Error('Predicate must be expressed in the form of an equality')
 		}
 	}
-}
 
-var validatePresenceOfBooleanOp = function( el, i, arr ){
-	function boolOpsPresent( char ) {
-		return char == '<' || '>' || '!' || '%'
-	}
+	return {
+		validatePredicates: predicateValidator,
 
-	if(!el.split('').some(boolOpsPresent)){
-		throw new Error('At least one boolean operator required');
 	}
 }
-
-var a = inputValidator();
-a.validatePredicate(['      x==2', '     x 1'])
 
 module.exports = inputValidator;
