@@ -15,8 +15,14 @@ $(document).ready(function() {
 		comprehension = $( this ).serializeArray();
 		var len = comprehension[2].value - comprehension[1].value
 		var predicates = comprehension[3].value
+		// if the predicates field is emply
+		if(!predicates){
+			// replace with string "true"
+			predicates = 'true';
+		}
+		var index = comprehension[1].value
 		var lambda = comprehension[0].value
-		list = listMaker.newComprehension(len, lambda, predicates);
+		list = listMaker.newComprehension(len, lambda, predicates, index);
 		$('#list').text('my_list = [' + list.join(', ') + ']');
 
 
@@ -37,12 +43,12 @@ $(document).ready(function() {
 // MODULES
 
 var listFactory = function() {
-	function comprehension( len, lambdaString, predicates ) {
+	function comprehension( len, lambdaString, predicates, index ) {
 
 		let predicateString = predicateGenerator(predicates);
 		let lambda = lambdaGenerator(lambdaString, predicateString);
 
-		return listGenerator( len ).map(lambda).filter(removeUndef);
+		return listGenerator( len, index - 1 ).map(lambda).filter(removeUndef);
 
 	}
 
@@ -62,11 +68,11 @@ var listFactory = function() {
 		return lambda;
 	}
 
-	function listGenerator( len ) {
+	function listGenerator( len, index ) {
 
 		let list = [];
 
-		for(let i = 0; i < len; i ++) {
+		for(let i = index; i < len + index; i ++) {
 			list[i] = i + 1;
 		}
 
