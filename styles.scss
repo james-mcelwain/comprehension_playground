@@ -1,9 +1,53 @@
 body {
   font-family: monospace;
 }
-#resizable { width: 10px; height: 10x; padding: 10px; }
-.ui-resizable-ghost { border: 1px dotted gray; }
 
-.content {
-  text-align: justify;
+form {
+  #lambda {
+    border: none;
+    border-bottom: 1px dotted black;
+    text-align: center;
+    margin-right: 3px;
+
+  }
+
+  #min {
+    border: none;
+    border-bottom: 1px dotted black;
+    text-align: center;
+    width: 20px;
+
+  }
+
+  #max {
+    border: none;
+    border-bottom: 1px dotted black;
+    width: 20px;
+
+  }
+
+  #predicates {
+    margin-left: 3px;
+    border: none;
+    border-bottom: 1px dotted black;
+    text-align: center;
+
+  }
+
+  #submit {
+    margin-left: 20px;
+    border: 1px solid black;
+    border-radius: 2px;
+    text-align: center;
+
+  }
+}
+
+#list {
+  word-wrap: break-word;
+}
+
+#controls {
+  padding-bottom: 20px;
+  border-bottom: 2px dashed #aaa;
 }

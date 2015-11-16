@@ -1,10 +1,38 @@
 body {
   font-family: monospace; }
 
-#resizable {
-  width: 10px;
-  height: 10x;
-  padding: 10px; }
+form #lambda {
+  border: none;
+  border-bottom: 1px dotted black;
+  text-align: center;
+  margin-right: 3px; }
 
-.ui-resizable-ghost {
-  border: 1px dotted gray; }
+form #min {
+  border: none;
+  border-bottom: 1px dotted black;
+  text-align: center;
+  width: 20px; }
+
+form #max {
+  border: none;
+  border-bottom: 1px dotted black;
+  width: 20px; }
+
+form #predicates {
+  margin-left: 3px;
+  border: none;
+  border-bottom: 1px dotted black;
+  text-align: center; }
+
+form #submit {
+  margin-left: 20px;
+  border: 1px solid black;
+  border-radius: 2px;
+  text-align: center; }
+
+#list {
+  word-wrap: break-word; }
+
+#controls {
+  padding-bottom: 20px;
+  border-bottom: 2px dashed #aaa; }

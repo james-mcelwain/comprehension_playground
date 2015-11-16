@@ -5,30 +5,23 @@
 $(document).ready(function() {
 	var listMaker = listFactory();
 	var $uiWidth;
-	var $comprehension;
+	var comprehension;
+	var list;
 
 	var $predicateString = undefined;
 
 	$('#comprehension-form').submit(function(event){
 		event.preventDefault();
-		$comprehension = $( this ).serializeArray();
-		var list = listMaker.newComprehension($uiWidth, $comprehension[1].value, $comprehension[1].value.split(','));
-		$('.content').text("[" + list + "]")
+		comprehension = $( this ).serializeArray();
+		var len = comprehension[2].value - comprehension[1].value
+		var predicates = comprehension[3].value
+		var lambda = comprehension[0].value
+		list = listMaker.newComprehension(len, lambda, predicates);
+		$('#list').text('my_list = [' + list.join(', ') + ']');
+
 
 	})
 
-	$( "#resizable" ).resizable({
-		maxWidth: 1000,
-		minHeight: 10,
-		maxHeight: 10,
-		resize: function( event, ui ) {
-				$uiWidth = $('.ui-widget-content').width() / 21
-				if($comprehension){
-					var list = listMaker.newComprehension($uiWidth, $comprehension[1].value, $comprehension[1].value.split(','));
-					$('.content').text("[" + list + "]")
-				}
-			},
-	});
 });
 
 
@@ -44,20 +37,20 @@ $(document).ready(function() {
 // MODULES
 
 var listFactory = function() {
-	function comprehension( len, lambdaString, predicateArray ) {
+	function comprehension( len, lambdaString, predicates ) {
 
-		let predicateString = predicateGenerator(predicateArray);
+		let predicateString = predicateGenerator(predicates);
 		let lambda = lambdaGenerator(lambdaString, predicateString);
-		return listGenerator( len ).map(lambda).filter(predicates);
+
+		return listGenerator( len ).map(lambda).filter(removeUndef);
 
 	}
 
-	function predicates( x ) {
+	function removeUndef( x ) {
 		return x != null || undefined;
 	}
 
 	function lambdaGenerator(lambdaString, predicateString) {
-
 		function lambda( x, i, arr ) {
 			if( eval( predicateString ) ) {
 				return eval( lambdaString );
@@ -81,8 +74,7 @@ var listFactory = function() {
 	}
 
 	function predicateGenerator( predicates ) {
-		predicates = predicates.join(' && ');
-
+		predicates = predicates.replace('and', '&&').replace('or', '||').replace('not', '!')
 		return predicates;
 	}
 

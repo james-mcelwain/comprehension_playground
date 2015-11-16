@@ -9,15 +9,24 @@ html(lang='en')
     link(rel='stylesheet', href='./styles/styles.css')
     script(src='./scripts/main.js')
   body
-  
-    form#comprehension-form
-      label lambda x:
-      input(type='text' name='lambda' required)
-      label Predicates
-      input(type='text' name='predicates')
-      input(type="submit" id="submit")
-      #err 
+    #controls
+      h1 List Control:
       
-    #resize-parent
-      #resizable.ui-widget-content
-    .content(style="width:100vh; height: 100px;")
+      h4 Array Comprehension:
+      <p>&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp  <i> lambda argument&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp min&nbspmax&nbsp&nbsp  &nbsp predicates</i></p>
+      form#comprehension-form
+        label my_list = [
+        input#lambda(type='text' name='lambda' required)
+        label for x in range(
+        input#min(type='text' name='min' required)
+        label , 
+        input#max(type='text' name='max' required)
+        label )
+        input#predicates(type='text' name='predicates')
+        label ]
+        input(type="submit" id="submit")
+        #err 
+        
+    #display
+      p#list my_list = []
+        
