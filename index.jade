@@ -1,19 +1,23 @@
-html(ng-app='comprehensions')
+doctype html
+html(lang='en')
   head
-    title
-    script(src='./scripts/bundle.js')
-    link(rel='stylesheet' href='./styles/styles.css')
-  body(ng-controller='mainCtrl as vm')
-    form(name='comprehension' ng-submit='vm.submit()')
+    meta(charset='utf-8')
+    title jQuery UI Resizable - Visual feedback
+    link(rel='stylesheet', href='http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css')
+    script(src='http://code.jquery.com/jquery-1.10.2.js')
+    script(src='http://code.jquery.com/ui/1.11.4/jquery-ui.js')
+    link(rel='stylesheet', href='./styles/styles.css')
+    script(src='./scripts/main.js')
+  body
+  
+    form#comprehension-form
       label lambda x:
-      input(type='text' name='lambda' ng-model='vm.lambda' required)
+      input(type='text' name='lambda' required)
       label Predicates
-      input(type='text' name='predicates' ng-model='vm.predicates')
-      input(type="submit" id="submit" value="Submit")
-      #err {{ vm.err }}
-
-    h1 [] : {{ vm.comprehension }}
-
-    h3 {{ vm.list }}
-
-    #sketch
+      input(type='text' name='predicates')
+      input(type="submit" id="submit")
+      #err 
+      
+    #resize-parent
+      #resizable.ui-widget-content
+    .content(style="width:100vh; height: 100px;")

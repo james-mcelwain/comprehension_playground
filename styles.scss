@@ -1,20 +1,9 @@
 body {
   font-family: monospace;
 }
+#resizable { width: 10px; height: 10x; padding: 10px; }
+.ui-resizable-ghost { border: 1px dotted gray; }
 
-
-form {
-  font-size: 18px;
-  input {
-    font-size: 18px;
-    font-family: monospace;
-    border: none;
-    border-bottom: 2px dotted black;
-    margin-right: 10px;
-  }
-
-  input:last-child {
-    border: 1px solid black;
-    border-radius: 2px;
-  }
+.content {
+  text-align: justify;
 }

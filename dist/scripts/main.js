@@ -1,4 +1,48 @@
 "use strict";
+
+
+
+$(document).ready(function() {
+	var listMaker = listFactory();
+	var $uiWidth;
+	var $comprehension;
+
+	var $predicateString = undefined;
+
+	$('#comprehension-form').submit(function(event){
+		event.preventDefault();
+		$comprehension = $( this ).serializeArray();
+		var list = listMaker.newComprehension($uiWidth, $comprehension[1].value, $comprehension[1].value.split(','));
+		$('.content').text("[" + list + "]")
+
+	})
+
+	$( "#resizable" ).resizable({
+		maxWidth: 1000,
+		minHeight: 10,
+		maxHeight: 10,
+		resize: function( event, ui ) {
+				$uiWidth = $('.ui-widget-content').width() / 21
+				if($comprehension){
+					var list = listMaker.newComprehension($uiWidth, $comprehension[1].value, $comprehension[1].value.split(','));
+					$('.content').text("[" + list + "]")
+				}
+			},
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+// MODULES
+
 var listFactory = function() {
 	function comprehension( len, lambdaString, predicateArray ) {
 
@@ -47,9 +91,3 @@ var listFactory = function() {
 		newPredicateString: predicateGenerator
 	}
 }
-
-module.exports = listFactory;
-
-// let  = 'x';
-// let predicate = predicateGenerator(['x > 2', 'x % 3 != 0']);
-// console.log(listFactory.newComprehension(10, lambda, predicate));
