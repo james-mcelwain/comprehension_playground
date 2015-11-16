@@ -61,12 +61,22 @@ module.exports = listFactory;
 /** DEPENDENCIES **/
 ;
 const angular = require('angular'),
+      noUiSlider = require('nouislider-browser'),
       listFactory = require('./listFactory.js');
 
 angular.module('comprehensions', []).factory('listFactory', [listFactory]).controller('mainCtrl', ['listFactory', function (listFactory) {
+  var rangeSlider = document.getElementById('slider');
+
+  noUiSlider.create(rangeSlider, {
+    start: [4000],
+    range: {
+      'min': [2000],
+      'max': [10000]
+    }
+  });
+
   var vm = this;
-  vm.min = 0;
-  vm.max = window.innerWidth;
+
   vm.submit = function () {
     let pattern = vm.pattern;
     let predicates = vm.predicates.split(',');
@@ -79,7 +89,7 @@ angular.module('comprehensions', []).factory('listFactory', [listFactory]).contr
   console.log('hello!');
 }]);
 
-},{"./listFactory.js":1,"angular":4}],3:[function(require,module,exports){
+},{"./listFactory.js":1,"angular":4,"nouislider-browser":5}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -28988,4 +28998,7 @@ $provide.value("$locale", {
 require('./angular');
 module.exports = angular;
 
-},{"./angular":3}]},{},[2]);
+},{"./angular":3}],5:[function(require,module,exports){
+// placeholder, so require.resolve('xxx-browser') gives root path.
+
+},{}]},{},[2]);

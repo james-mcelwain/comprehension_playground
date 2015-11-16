@@ -24,6 +24,8 @@
     "gulp-jade": "^1.1.0",
     "gulp-sass": "^2.1.0",
     "gulp-util": "^3.0.7",
+    "nouislider": "github:leongersen/noUiSlider",
+    "nouislider-browser": "^5.0.0-1",
     "vinyl-source-stream": "^1.1.0"
   }
 }

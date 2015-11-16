@@ -6,12 +6,14 @@ const
     listFactory = require('./listFactory.js');
 
 angular
-    .module('comprehensions', [])
+    .module('comprehensions', [
+    ])
     .factory('listFactory', [listFactory])
     .controller('mainCtrl', ['listFactory', function(listFactory) {
+
+
       var vm = this;
-      vm.min = 0;
-      vm.max = window.innerWidth;
+
       vm.submit = function(  ) {
         let pattern = vm.pattern;
         let predicates = vm.predicates.split(',');
@@ -19,7 +21,9 @@ angular
         const predicateString = listFactory.newPredicateString(predicates);
         vm.comprehension = `[ ${vm.pattern} for x in range(1, infinity), if ${predicateString} ]`
         console.log(listFactory.newComprehension(10, pattern, predicates));
-      };
+
+        };
+
 
 
       console.log('hello!');
