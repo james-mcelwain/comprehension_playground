@@ -10,6 +10,8 @@ angular
     .factory('listFactory', [listFactory])
     .controller('mainCtrl', ['listFactory', function(listFactory) {
       var vm = this;
+      vm.min = 0;
+      vm.max = window.innerWidth;
       vm.submit = function(  ) {
         let pattern = vm.pattern;
         let predicates = vm.predicates.split(',');
