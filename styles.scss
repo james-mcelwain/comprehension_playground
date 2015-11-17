@@ -3,6 +3,10 @@ body {
 }
 
 form {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+
   #lambda {
     border: none;
     border-bottom: 1px dotted black;
@@ -39,7 +43,6 @@ form {
     border: 1px solid black;
     border-radius: 2px;
     text-align: center;
-
   }
 }
 
@@ -50,4 +53,23 @@ form {
 #controls {
   padding-bottom: 20px;
   border-bottom: 2px dashed #aaa;
+}
+
+#lambda-map {
+  margin-left: 3px;
+  border: none;
+  border-bottom: 1px dotted black;
+  text-align: center;
+}
+
+#submit-map {
+  margin-left: 20px;
+  border: 1px solid black;
+  border-radius: 2px;
+  text-align: center;
+}
+
+#err {
+  color: red;
+  margin-top: 10px;
 }

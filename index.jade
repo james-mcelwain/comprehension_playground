@@ -29,8 +29,16 @@ html(lang='en')
         input#predicates(type='text' name='predicates')
         label ]
         input(type="submit" id="submit")
-        #err 
+        
+      form#map-form
+        label map(lambda x: 
+        input#lambda-map(type='text' name='lambda-map' required)
+        label , my_list)
+        input(type="submit" id="submit-map")
+      
+      #err 
+
         
     #display
-      p#list my_list = []
+      p#list >>> my_list = []
         
