@@ -38,6 +38,7 @@ $(document).ready(function() {
 
 
 	$('#map-form').submit(function(event){
+		$('#err').text('');
 		event.preventDefault();
 		try {
 			if(!list) {
@@ -46,6 +47,7 @@ $(document).ready(function() {
 
 			var mapFunction = $( this ).serializeArray();
 			console.log(mapFunction)
+			validate.lambda(mapFunction[0].value);
 			list = list.map(function( x ){
 					return eval(mapFunction[0].value)
 			})

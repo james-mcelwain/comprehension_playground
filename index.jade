@@ -2,7 +2,7 @@ doctype html
 html(lang='en')
   head
     meta(charset='utf-8')
-    title jQuery UI Resizable - Visual feedback
+    title List Comprehension Playground
     link(rel='stylesheet', href='http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css')
     script(src='http://code.jquery.com/jquery-1.10.2.js')
     script(src='http://code.jquery.com/ui/1.11.4/jquery-ui.js')
@@ -13,12 +13,13 @@ html(lang='en')
       h1 List Control:
       
       h4 Use Notes
-      p Currently, the script is dirty evaling input fields. It will transform python operators "and/or/not" to the appropriate JS, but still evaluates in only one if statement. Variables must be expressed in terms of x.
+      p This is a learning project, and currently not doing much more else than building lists in pythonic syntax.
+      p Currently, the script is dirty evaling input fields. It will transform python operators "and/or/not" to the appropriate JS, but still evaluates in only one if statement. Expressions must be in terms of x. I obviously did not implement a Python interpreter in JS, so assume that only bassic math and boolean tests will work. Type coercion is, however, disabled.
       
       
       h4 Array Comprehension:
-      <p>&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp  <i> lambda argument&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp min&nbsp max&nbsp&nbsp  &nbsp&nbsp&nbsp     predicate</i></p>
-      form#comprehension-form
+      <p>&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp&nbsp  <i> &nbsp mapping expr&nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp min&nbsp max&nbsp&nbsp  &nbsp&nbsp&nbsp     predicate</i></p>
+      form#comprehension-form(method="POST")
         label my_list = [
         input#lambda(type='text' name='lambda' required)
         label for x in range(
@@ -29,8 +30,9 @@ html(lang='en')
         input#predicates(type='text' name='predicates')
         label ]
         input(type="submit" id="submit")
-        
-      form#map-form
+      
+      br        
+      form#map-form(method="POST")
         label map(lambda x: 
         input#lambda-map(type='text' name='lambda-map' required)
         label , my_list)
