@@ -13,11 +13,11 @@ import source from 'vinyl-source-stream'
 
 const config = {
   paths : {
-    sass : './*.scss',
+    sass : './src/*.scss',
     css : './dist/styles',
-    es6 : './main.js', // entry point to js for browserify
+    es6 : './src/main.js', // entry point to js for browserify
     js : './dist/scripts',
-    jade : './*jade',
+    jade : './src/*jade',
     html : './dist/'
   }
 }

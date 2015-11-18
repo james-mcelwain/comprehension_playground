@@ -2,55 +2,15 @@ body {
   font-family: monospace; }
 
 form {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 10px; }
-  form #lambda {
+  font-size: 18px; }
+  form input {
+    font-size: 18px;
+    font-family: monospace;
     border: none;
-    border-bottom: 1px dotted black;
-    text-align: center;
-    margin-right: 3px; }
-  form #min {
-    border: none;
-    border-bottom: 1px dotted black;
-    text-align: center;
-    width: 20px; }
-  form #max {
-    border: none;
-    border-bottom: 1px dotted black;
-    width: 20px; }
-  form #predicates {
-    margin-left: 3px;
-    border: none;
-    border-bottom: 1px dotted black;
-    text-align: center; }
-  form #submit {
-    margin-left: 20px;
+    border-bottom: 2px dotted black;
+    margin-right: 10px; }
+  form input:last-child {
     border: 1px solid black;
-    border-radius: 2px;
-    text-align: center; }
-
-#list {
-  word-wrap: break-word; }
-
-#controls {
-  padding-bottom: 20px;
-  border-bottom: 2px dashed #aaa; }
-
-#lambda-map {
-  margin-left: 3px;
-  border: none;
-  border-bottom: 1px dotted black;
-  text-align: center; }
-
-#submit-map {
-  margin-left: 20px;
-  border: 1px solid black;
-  border-radius: 2px;
-  text-align: center; }
-
-#err {
-  color: red;
-  margin-top: 10px; }
+    border-radius: 2px; }
 
 /*# sourceMappingURL=styles.css.map */
