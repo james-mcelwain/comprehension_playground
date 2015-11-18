@@ -1,6 +1,3 @@
-import $ from 'jquery';
-import inputValidator from './inputValidator';
-
 export function mapSubmit(validate, list){
   $('#map-form').submit(function(event) {
       $('#err').text('');
