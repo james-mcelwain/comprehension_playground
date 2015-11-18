@@ -1,6 +1,6 @@
 "use strict";
-import {mapSubmit}from "./mapForm.js";
-import {comprehensionSubmit} from "./comprehensionForm.js"
+import {mapSubmit}from "./jQFuncs/mapForm.js";
+import {comprehensionSubmit} from "./jQFuncs/comprehensionForm.js"
 
 import {listFactory} from "./listFactory";
 import {inputValidator} from "./inputValidator";

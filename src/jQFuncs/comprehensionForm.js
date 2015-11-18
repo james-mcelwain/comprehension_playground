@@ -21,9 +21,9 @@ export function comprehensionSubmit(listMaker, validate, list){
       validate.predicate(predicates);
       list.c = listMaker.newComprehension(len, lambda, predicates, index);
       $('#list').text('>>> my_list = [' + list.c.join(', ') + ']');
-
     } catch(err) {
       $('#err').text(err.message)
     }
+
   })
 }
