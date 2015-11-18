@@ -1,20 +1,12 @@
-'use strict'
-var inputValidator = function(){
+'use strict';
 
-	function predicateValidator( predicateArr ){
-		try {
-			predicateArr.forEach(validatePredicate);
-			return true;
-		} catch( err ) {
-			console.log(err);
-			return err;
-		}
-	}
+export function inputValidator(){
 
-	function validatePredicate( el, i, arr ){
+	function validatePredicate( string ){
 		const x = 1
-		const test = eval(el);
+		const test = eval(string);
 		if(typeof test !== 'boolean') {
+			console.log('in if')
 			throw new Error('Predicate must be expressed in the form of an equality test')
 		}
 	}
@@ -28,9 +20,7 @@ var inputValidator = function(){
 	}
 
 	return {
-		predicate: predicateValidator,
+		predicate: validatePredicate,
 		lambda: lambdaValidator
 	}
 }
-
-module.exports = inputValidator;
