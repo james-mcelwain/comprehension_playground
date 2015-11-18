@@ -1,19 +1,18 @@
-"use strict";
-var listFactory = function() {
-	function comprehension( len, lambdaString, predicateArray ) {
+export function listFactory() {
+	function comprehension( len, lambdaString, predicates, index ) {
 
-		let predicateString = predicateGenerator(predicateArray);
+		let predicateString = predicateGenerator(predicates);
 		let lambda = lambdaGenerator(lambdaString, predicateString);
-		return listGenerator( len ).map(lambda).filter(predicates);
+
+		return listGenerator( len, index - 1 ).map(lambda).filter(removeUndef);
 
 	}
 
-	function predicates( x ) {
+	function removeUndef( x ) {
 		return x != null || undefined;
 	}
 
 	function lambdaGenerator(lambdaString, predicateString) {
-
 		function lambda( x, i, arr ) {
 			if( eval( predicateString ) ) {
 				return eval( lambdaString );
@@ -25,11 +24,11 @@ var listFactory = function() {
 		return lambda;
 	}
 
-	function listGenerator( len ) {
+	function listGenerator( len, index ) {
 
 		let list = [];
 
-		for(let i = 0; i < len; i ++) {
+		for(let i = index; i < len + index; i ++) {
 			list[i] = i + 1;
 		}
 
@@ -37,8 +36,7 @@ var listFactory = function() {
 	}
 
 	function predicateGenerator( predicates ) {
-		predicates = predicates.join(' && ');
-
+		predicates = predicates.replace('and', '&&').replace('or', '||').replace('not', '!')
 		return predicates;
 	}
 
@@ -47,9 +45,3 @@ var listFactory = function() {
 		newPredicateString: predicateGenerator
 	}
 }
-
-module.exports = listFactory;
-
-// let  = 'x';
-// let predicate = predicateGenerator(['x > 2', 'x % 3 != 0']);
-// console.log(listFactory.newComprehension(10, lambda, predicate));
